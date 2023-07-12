@@ -1,38 +1,11 @@
-Rem Copyright (c) 1990 by Oracle Corporation
-Rem NAME
-REM    UTLSAMPL.SQL
-Rem  FUNCTION
-Rem  NOTES
-Rem  MODIFIED
-Rem	gdudey	   06/28/95 -  Modified for desktop seed database
-Rem	glumpkin   10/21/92 -  Renamed from SQLBLD.SQL
-Rem	blinden   07/27/92 -  Added primary and foreign keys to EMP and DEPT
-Rem	rlim	   04/29/91 -	      change char to varchar2
-Rem	mmoore	   04/08/91 -	      use unlimited tablespace priv
-Rem	pritto	   04/04/91 -	      change SYSDATE to 13-JUL-87
-Rem   Mendels	 12/07/90 - bug 30123;add to_date calls so language independent
-Rem
-rem
-rem $Header: rdbms/common_nt/sql/scott.sql /main/3 2020/07/20 03:48:35 dgoddard Exp $ sqlbld.sql
-rem
+
 SET TERMOUT OFF
 SET ECHO OFF
-CREATE TABLE BONUS
-
-
-
-rem CONGDON    Invoked in RDBMS at build time.	 29-DEC-1988
-rem OATES:     Created: 16-Feb-83
-
---GRANT CONNECT,RESOURCE,UNLIMITED TABLESPACE TO SCOTT IDENTIFIED BY TIGER;
---ALTER USER SCOTT DEFAULT TABLESPACE USERS;
---ALTER USER SCOTT TEMPORARY TABLESPACE TEMP;
---CONNECT SCOTT/TIGER
 
 -- EMP - FK - DEPT - PK
-DROP TABLE DEPT;
 DROP TABLE EMP;
-DROP TABLE BONUS;
+DROP TABLE DEPT;
+--DROP TABLE BONUS;
 DROP TABLE SALGRADE;
 
 
@@ -50,6 +23,7 @@ CREATE TABLE EMP
 	SAL NUMBER(7,2),
 	COMM NUMBER(7,2),
 	DEPTNO NUMBER(2) CONSTRAINT FK_DEPTNO REFERENCES DEPT);
+    
 INSERT INTO DEPT VALUES	(10,'ACCOUNTING','NEW YORK');
 INSERT INTO DEPT VALUES (20,'RESEARCH','DALLAS');
 INSERT INTO DEPT VALUES	(30,'SALES','CHICAGO');
@@ -69,13 +43,6 @@ INSERT INTO EMP VALUES(7900,'JAMES','CLERK',7698,to_date('3-12-1981','dd-mm-yyyy
 INSERT INTO EMP VALUES(7902,'FORD','ANALYST',7566,to_date('3-12-1981','dd-mm-yyyy'),3000,NULL,20);
 INSERT INTO EMP VALUES(7934,'MILLER','CLERK',7782,to_date('23-1-1982','dd-mm-yyyy'),1300,NULL,10);
 
-
-	(
-	ENAME VARCHAR2(10)	,
-	JOB VARCHAR2(9)  ,
-	SAL NUMBER,
-	COMM NUMBER
-	) ;
 
 CREATE TABLE SALGRADE
       ( GRADE NUMBER,
